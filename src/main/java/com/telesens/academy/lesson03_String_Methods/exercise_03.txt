@@ -1,0 +1,11 @@
+String[] users = {"petrov", "Ivanov ", "KiRill", "    Helen    "};
+
+String[] allUsers = {"Andry", "Abdel", "Amanda", "Alyona", "Nataly", "Nelly", "Nikola", "Nina"};
+String[] firstPartOfUsers = new String[4];
+String[] secondPartOfUsers = new String[4];
+
+Привет! Не забывайте комментировать свой код. 
+Для однострочных комментариев используйте символы "//"
+Для многострочных - /* Комментарий */
+Обратные слеши "\\" для обозначения комментариев не используется
+ 

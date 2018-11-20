@@ -1,0 +1,107 @@
+16 Работа с файлами-Excel-Property - ДЗ.txt
+
+# Задачи на работу с файлами:
+	- текстовыми
+	- properties
+	- excel
+	- zip
+
+===========================================================================
+	Библиотека для работы с excel: https://poi.apache.org/
+===========================================================================
+
+1)  Создать файл 'java-part.properties' следующие свойства:
+
+		subscriber.exc=d:/myprojects/java-part/data/subscriber.xlsx
+		subscriber.txt=d:/myprojects/java-part/data/subscriber.txt
+		subscriber.sort.txt=d:/myprojects/java-part/data/subscriber-sort.txt
+		subscriber.arc=d:/myprojects/java-part/data/subscriber.zip
+
+		male.firstnames=d:/myprojects/java-part/data/мужские имена.txt
+		male.lastnames=d:/myprojects/java-part/data/мужские фамилии.txt
+		female.firstnames=d:/myprojects/java-part/data/женские имена.txt
+		female.lastnames=d:/myprojects/java-part/data/женские фамилии.txt
+
+		// TODO
+		# Диапазон возрастов
+		age.from=5
+		age.to=90
+
+		# Использовать ли Гауссово распределение (true/false)
+		age.gaussian=true
+
+
+За основу взять /home/billiscorp/Work/Telesens/QA-JA/Java-part-maven/src/main/java/com/telesens/academy/lesson18_File/file/SubscriberDemo.java
+
+
+
+2) Написать Java приложение, которое наполнит файл subscribers.xlsx, случайными данными:
+	(путь к файлу взять из 'java-part.properties')
+	a) Наполнить таблицу абонентов excel(2000 строк):
+		- имена фамилии взять в соответстсвующих файлах (см. 'java-part.properties') со списком имен/фамилий (женских/мужских);
+		- возраст генерировать случайно от 5 до 90 (можно использовать Гауссово распределение для этого диапазона)
+			(диапазон брать из файла 'java-part.properties')
+
+	b)  Телефонные номера для каждого оператора со следующими префиксами:
+		- Life номера с префиксами: 38063*******, 38093*******, 38073*******
+		- Kievstar номера с префиксами: 38097*******, 38067*******, 38098*******
+		- Vodafone номера с префиксами: 38050*******, 38066*******, 38095*******
+
+	Результат subscribers.xlsx должен выглядеть так:
+		   1 | Васильев  | Иван | м | 23 | 380630025465 | Life
+		   2 | Петрова   | Катя | ж | 34 | 380670058694 | Kievstar
+		...
+		2000 | Борисов   | Коля | м | 48 | 380500025465 | Vodafone
+		Всего 2000 случайных строк
+
+	с) Реализовать класс Subscriber с приватными полями:
+		- private Long id;
+		- private String firstName;
+		- private String lastName;
+		- private Gender gender; // создать перечисление Gender для мужского и женского пола
+		- private int age;
+		- private String phoneNumber;
+		- private String operator;
+
+	d) Прочитать subscribers.xlsx в коллекцию Map<Long, Subscriber> и сохранить в текстовый файл: subscribers.txt
+		(путь к файлу взять из 'java-part.properties')
+
+	e) Прочитать subscribers.xlsx в коллекцию List<Subscriber> отсортировать сразу по 4 полям:
+		- оператору
+		- по возрасту
+		- по фамилии
+		- по имени
+
+	f) Сохранить результат сортировки в файл 'sort-subscribers.txt'
+		(путь к файлу взять из 'java-part.properties')
+
+
+	g) Прочитать 1-ый десять строк файла sort-subscribers.txt и вывести на экран
+		(путь к файлу взять из 'java-part.properties')
+
+3)  Упаковать файлы 'subscribers.txt' и 'java-part.properties' в zip архив 'subscriber.zip'
+		(путь к исходным файлам и zip архиву брать из файла 'java-part.properties')
+
+4)*  Написать тест, который:
+		- запускает 3 задание
+
+	После этого проверяет:
+		- наличие zip архива:  'subscriber.zip'
+		- кол-во упакованных файлов равно 2
+		- наличие в zip архиве файлов:
+			'subscribers.xlsx'
+			'subscribers.txt'
+
+
+
+
+
+
+
+
+
+
+
+
+
+

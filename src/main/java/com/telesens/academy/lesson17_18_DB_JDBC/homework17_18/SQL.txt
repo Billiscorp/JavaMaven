@@ -1,0 +1,158 @@
+1) Добавить в БД Mobile используя sql запросы:
+
+***************************************************************************
+	- 3 мобильных оператор
+
+	use mobile;
+    select * from operator ;
+    insert into operator (name, address) values ("Jeans","ул. Гагарина 128");
+    select * from operator ;
+    insert into operator (name, address) values ("Ace&Bace","ул. Советская 28");
+    select * from operator ;
+    insert into operator (name, address) values ("Mobi","ул. Полевая 44");
+    select * from operator ;
+
+    '1', 'Life', 'ул. Мирон. 12'
+    '2', 'Vodafone', 'ул. Сумская 14'
+    '3', 'Kievstar', 'ул. Петровского'
+    '4', 'MTC', 'ул. Научная 28'
+    '5', 'Jeans', 'ул. Гагарина 128'
+    '6', 'Ace&Bace', 'ул. Советская 28'
+    '7', 'Mobi', 'ул. Полевая 44'
+**************************************************************************
+	- 20 абонентов
+
+	use mobile;
+    select * from subscriber ;
+    insert into subscriber (id, age, first_name, gender, last_name) values (48,31,"Maша","f","Корженко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (54,34,"Maша","f","Клопотенко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (65,37,"Даша","f","Половик");
+    insert into subscriber (id, age, first_name, gender, last_name) values (76,55,"Саша","m","Михайленко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (87,40,"Петя","m","Кузьменко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (98,56,"Катя","f","Клопотенко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (103,39,"Maша","f","Корженко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (112,42,"Maша","f","Половик");
+    insert into subscriber (id, age, first_name, gender, last_name) values (124,50,"Петя","m","Кузьменко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (135,33,"Даша","f","Корженко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (142,53,"Миша","m","Корженко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (153,25,"Миша","m","Половик");
+    insert into subscriber (id, age, first_name, gender, last_name) values (167,37,"Даша","f","Михайленко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (179,24,"Паша","m","Михайленко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (182,40,"Петя","m","Михайленко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (192,46,"Миша","m","Михайленко");
+    insert into subscriber (id, age, first_name, gender, last_name) values (203,49,"Даша","f","Михайленко");
+    select * from subscriber ;
+
+
+
+
+	- 30 мобильных номеров (номер должен принадлежать оператору)
+
+	use mobile;
+    select * from operator_number ;
+    insert into operator_number (number, operator_id) values ("380639084194","1");
+    insert into operator_number (number, operator_id) values ("380735876849","1");
+    insert into operator_number (number, operator_id) values ("380938633407","1");
+    insert into operator_number (number, operator_id) values ("380635886308","1");
+    insert into operator_number (number, operator_id) values ("380732950873","1");
+    insert into operator_number (number, operator_id) values ("380939344837","1");
+    insert into operator_number (number, operator_id) values ("380636304713","1");
+    insert into operator_number (number, operator_id) values ("380738176883","1");
+    insert into operator_number (number, operator_id) values ("380931497567","1");
+    insert into operator_number (number, operator_id) values ("380935139846","1");
+    insert into operator_number (number, operator_id) values ("380509758213","2");
+    insert into operator_number (number, operator_id) values ("380668401662","2");
+    insert into operator_number (number, operator_id) values ("380959991212","2");
+    insert into operator_number (number, operator_id) values ("380995888546","2");
+    insert into operator_number (number, operator_id) values ("380502127555","2");
+    insert into operator_number (number, operator_id) values ("380665832394","2");
+    insert into operator_number (number, operator_id) values ("380953642188","2");
+    insert into operator_number (number, operator_id) values ("380996038910","2");
+    insert into operator_number (number, operator_id) values ("380509605249","2");
+    insert into operator_number (number, operator_id) values ("380993073387","2");
+    insert into operator_number (number, operator_id) values ("380676963806","3");
+    insert into operator_number (number, operator_id) values ("380686888016","3");
+    insert into operator_number (number, operator_id) values ("380966470593","3");
+    insert into operator_number (number, operator_id) values ("380978680879","3");
+    insert into operator_number (number, operator_id) values ("380975562680","3");
+    insert into operator_number (number, operator_id) values ("380671967130","3");
+    insert into operator_number (number, operator_id) values ("380681375733","3");
+    insert into operator_number (number, operator_id) values ("380967862699","3");
+    insert into operator_number (number, operator_id) values ("380976656680","3");
+    insert into operator_number (number, operator_id) values ("380978906564","3");
+    select * from operator_number ;
+
+    use mobile;
+    select * from phone_book;
+    insert into phone_book (phone_number, abonent_id) values ("380639084194","43");
+    insert into phone_book (phone_number, abonent_id) values ("380735876849","48");
+    insert into phone_book (phone_number, abonent_id) values ("380938633407","54");
+    insert into phone_book (phone_number, abonent_id) values ("380635886308","65");
+    insert into phone_book (phone_number, abonent_id) values ("380732950873","76");
+    insert into phone_book (phone_number, abonent_id) values ("380939344837","87");
+    insert into phone_book (phone_number, abonent_id) values ("380636304713","98");
+    insert into phone_book (phone_number, abonent_id) values ("380738176883","101");
+    insert into phone_book (phone_number, abonent_id) values ("380931497567","103");
+    insert into phone_book (phone_number, abonent_id) values ("380935139846","106");
+    insert into phone_book (phone_number, abonent_id) values ("380509758213","112");
+    insert into phone_book (phone_number, abonent_id) values ("380668401662","124");
+    insert into phone_book (phone_number, abonent_id) values ("380959991212","135");
+    insert into phone_book (phone_number, abonent_id) values ("380995888546","142");
+    insert into phone_book (phone_number, abonent_id) values ("380502127555","153");
+    insert into phone_book (phone_number, abonent_id) values ("380665832394","167");
+    insert into phone_book (phone_number, abonent_id) values ("380953642188","179");
+    insert into phone_book (phone_number, abonent_id) values ("380996038910","182");
+    insert into phone_book (phone_number, abonent_id) values ("380509605249","192");
+    insert into phone_book (phone_number, abonent_id) values ("380993073387","203");
+    insert into phone_book (phone_number, abonent_id) values ("380676963806","43");
+    insert into phone_book (phone_number, abonent_id) values ("380686888016","48");
+    insert into phone_book (phone_number, abonent_id) values ("380966470593","65");
+    insert into phone_book (phone_number, abonent_id) values ("380978680879","87");
+    insert into phone_book (phone_number, abonent_id) values ("380975562680","101");
+    insert into phone_book (phone_number, abonent_id) values ("380671967130","124");
+    insert into phone_book (phone_number, abonent_id) values ("380681375733","142");
+    insert into phone_book (phone_number, abonent_id) values ("380967862699","167");
+    insert into phone_book (phone_number, abonent_id) values ("380976656680","182");
+    insert into phone_book (phone_number, abonent_id) values ("380978906564","192");
+    select * from phone_book;
+
+2) Написать sql запросы на выборку следующих данных:
+- всех абонентов заданного мобильного оператора
+
+	use mobile;
+    SELECT number FROM operator_number WHERE operator_id = 1;
+
+
+- все мобильные номера, выбранного абонента
+
+	use mobile;
+    SELECT phone_number FROM phone_book WHERE abonent_id = 142;
+
+
+- всех абонентов по списку номеров
+
+	use mobile;
+    SELECT abonent_id FROM phone_book WHERE phone_number IN ("380995888546", "380975562680");
+
+
+- кол-во мобильных номеров операторов
+
+	use mobile;
+    select COUNT(name) FROM operator;
+
+- оператора с наибольшим кол-во мобильных номеров ******* TODO *********
+	use mobile;
+    select * from operator_number ;
+    select COUNT(*) FROM operator_number where operator_id="1"; 12
+    select COUNT(*) FROM operator_number where operator_id="2"; 13
+    select COUNT(*) FROM operator_number where operator_id="3"; 13
+
+
+
+	- вывести абонентов, которые принадлежат к разным операторам (напр. Life и Kievstar)
+	- вывести абонентов, который принадлежит к мобильному оператору, но не принадлежит ни к одному другому
+	- определить, какого оператора предпочитают женщины, какого мужчины
+	- вывести всех абонентов возраста от 20 до 40 лет, только двух мобильных операторов, отсортировать по фамилии, кол-во не больше 5
+	- вывести кол-во абонентов по всем мобильным операторам от 20 до 40 лет, отсортировать убыванию
+
+
