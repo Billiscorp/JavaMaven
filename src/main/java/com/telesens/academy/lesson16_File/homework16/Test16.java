@@ -11,8 +11,81 @@ public class Test16 {
 
     public static void main(String[] args) throws IOException {
         //TODO подвязать файл и через метод вычитать строку
-        System.out.println(choose(new File("/home/billiscorp/Work/Telesens/QA-JA/Java-part-maven/data/Names_Male.txt")));
-        // Edit configuration
+       /* System.out.println(choose(new File("/home/billiscorp/Work/Telesens/QA-JA/Java-part-maven/data/Names_Male.txt")));
+        // Edit configuration*/
+
+
+          /* Телефонные номера для каждого оператора со следующими префиксами:
+            - Life номера с префиксами: 38063*******, 38093*******, 38073*******
+            - Kievstar номера с префиксами: 38097*******, 38067*******, 38098*******
+            - Vodafone номера с префиксами: 38050*******, 38066*******, 38095********/
+//        public  static  String generatePhoneNumber() {
+
+            for (int i=0;i<20;i++) {
+                String[] arrayPrefixLife = {"38063", "38093", "38073"};
+                String[] arrayPrefixKievstar = {"38097", "38067", "38098"};
+                String[] arrayPrefixVodafone = {"38050", "38066", "38095"};
+                String prefixLife;
+                String prefixKievstar;
+                String prefixVodafone;
+
+
+                int a = (int) (1 + Math.random() * 3);
+                Random ran = new Random();
+                System.out.println(a);
+
+                switch(a) {
+                    case 1:
+                    {
+                        prefixLife = arrayPrefixLife[(int) (Math.random() * 2)];
+                        Integer middleDigits = ran.nextInt(10_000_000);
+
+                        System.out.println(prefixLife+middleDigits.toString());
+                    };
+                        break;
+                    case 2:
+                    {
+                        prefixKievstar = arrayPrefixKievstar[(int) (Math.random() * 2)];
+                        Integer middleDigits = ran.nextInt(10_000_000);
+
+                        System.out.println(prefixKievstar+middleDigits.toString());
+                    };
+                        break;
+                    case 3:
+                    {
+                        prefixVodafone = arrayPrefixVodafone[(int) (Math.random() * 2)];
+                        Integer middleDigits = ran.nextInt(10_000_000);
+
+                        System.out.println(prefixVodafone+middleDigits.toString());
+                    };
+                        break;
+
+                }
+
+
+//        }
+
+            }
+
+           /* int firstThreeNumbers = 999;
+            int middleDigits = rand.nextInt(1_000_000);
+
+            // 1 способ
+            int lastDigit = rand.nextBoolean() ? 0 : 5;
+
+            // 2 способ
+//        if (rand.nextBoolean())
+//            last = 0;
+//        else
+//            last = 5;
+
+            long phoneNumber =
+                    firstThreeNumbers*1_000_0000L + // двигаем влево на 7 разрядов
+                            middleDigits*10 + // умножаем на 10, чтобы сдвинуть влево на один разряд
+                            lastDigit; // 0 или 5
+
+            return Long.toString(phoneNumber);
+        }*/
 
     }
 
@@ -36,7 +109,7 @@ public class Test16 {
 
     }*/
 
-    public static String choose(File f) throws FileNotFoundException
+    /*public static String choose(File f) throws FileNotFoundException
     {
         String result = null;
         Random rand = new Random();
@@ -50,10 +123,11 @@ public class Test16 {
         }
 
         return result;
-    }
+    }*/
 
 
 }
+
 
    /* RandomAccessFile raf = new RandomAccessFile(new File("MyFile.txt"), "r");
     String line = raf.readLine();

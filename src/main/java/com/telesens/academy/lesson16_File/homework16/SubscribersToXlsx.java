@@ -26,23 +26,50 @@ package com.telesens.academy.lesson16_File.homework16;
 */
 
 
+import com.telesens.academy.lesson16_File.file.Subscriber;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Random;
 import java.util.stream.Stream;
 
 public class SubscribersToXlsx {
 
+    ReadProperty prop = new ReadProperty();
     private String propFile = "hw.properties";
-    private String pathOut =  ReadProperty.readProperty(propFile,"pathOut");
-    private String fileXLS = ReadProperty.readProperty(propFile, "subscriber.xlsx");
+//    private String pathOut =  prop.readProperty(propFile,"pathOut");
+    private String fileXLS = prop.readProperty(propFile, "subscriber.xlsx");
 
 
     public static void main(String[] args) {
 
+        Random ran = new Random();
+        Long initId = 0L + ran.nextInt(100);
+        SubscriberFile.setCurrentId(initId); // при вычитки из базы макисмального ID вставить сюда !!!!
+
+        ReadProperty prop = new ReadProperty();
+        String propFile = "hw.properties";
+        String fileXLS = prop.readProperty(propFile, "subscriber.exc");
+        File file = new File("fileXLS");
+        SubscriberFile subscriberFile = new SubscriberFile();
+
+
         System.out.println("***Generate***");
-        int limit = 5;
+        int limit = 10;
         SubscriberFile [] array =
                 Stream
-                        .generate(SubscriberFile::nextSubscriber)
+                        .generate(subscriberFile::nextSubscriber)
                         .limit(limit)
+                        .peek(System.out::println)
+                        .peek(s -> {
+         bgcngncgncncgn                   prepareSubscriber(s);
+                        })
                         .peek(System.out::println)
                        /* .peek(s -> {
                             try {
@@ -56,6 +83,47 @@ public class SubscribersToXlsx {
         System.out.println("***Finish***");
 
 
+     /*    *//*Результат subscribers.xlsx должен выглядеть так:
+                            1 | Васильев  | Иван | м | 23 | 380630025465 | Life
+                            2 | Петрова   | Катя | ж | 34 | 380670058694 | Kievstar
+                            *//*
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Subscribers");
+                            *//*Object[][] data = {
+                                    {1, "text_1", 1.1},
+                                    {3, "text_3", 1.3},
+                                    {5, "text_5", 1.5},
+                                    {7, "text_7", 1.7},
+                                    {9, "text_9", 1.9}
+                            };*//*
+        for (int r = 0; r < limit; r++) {
+            Row row = sheet.createRow(r);
+            Cell cellID = row.createCell(0);
+            Cell cellLastName = row.createCell(1);
+            Cell cellFirstName = row.createCell(2);
+            Cell cellGender = row.createCell(3);
+            Cell cellAge = row.createCell(4);
+            Cell cellPhone = row.createCell(5);
+            Cell cellOperator = row.createCell(6);
+
+            cellID.setCellValue(SubscriberFile.);
+
+            cellText.setCellValue((String)data[r][1]);
+            cellDouble.setCellValue((Double) data[r][2]);
+        }
+        try(FileOutputStream out = new FileOutputStream(new File("d:/temp/saved.xlsx"))) {
+            workbook.write(out);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }*/
+    }
+
+
+
+
+    private static String prepareSubscriber (SubscriberFile subscriberFile) {
+        return subscriberFile.getId() + "," + subscriberFile.getLastName() + "," + subscriberFile.getFirstName() + "," + subscriberFile.getGender() + "," + subscriberFile.getAge() + "," + subscriberFile.getPhoneNumber()+ "," +subscriberFile.getOperator();
     }
 
 
@@ -69,3 +137,9 @@ public class SubscribersToXlsx {
 
 
 }
+
+
+
+
+
+

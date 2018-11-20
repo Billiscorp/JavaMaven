@@ -8,16 +8,16 @@ import java.util.Random;
 
 public class SubscriberFile implements Comparable<SubscriberFile> {
 
-    private static Long id ;
-    private static String firstName;
-    private static String lastName;
-    private static String gender;
-//    private Gender gender; // создать перечисление Gender для мужского и женского пола
-    private static int age;
-    private static String phoneNumber;
-    private static String operator;
-    private static Random rand = new Random();
-
+    private static Long currentid = 2L;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String gender;
+    //    private Gender gender; // создать перечисление Gender для мужского и женского пола
+    private int age;
+    private String phoneNumber;
+    private String operator;
+    private Random rand = new Random();
 
 
     public SubscriberFile() {
@@ -39,8 +39,8 @@ public class SubscriberFile implements Comparable<SubscriberFile> {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idx) {
+        this.id = idx;
     }
 
     public String getFirstName() {
@@ -130,47 +130,54 @@ public class SubscriberFile implements Comparable<SubscriberFile> {
     }
 
 
+    public static void setCurrentId(Long id) {
+        currentid = id;
+    }
 
-       public static SubscriberFile nextSubscriber()  { //throws FileNotFoundException
+    public SubscriberFile nextSubscriber() { //throws FileNotFoundException
 
-           SubscriberFile newSubscriber = null;
-           try {
-               newSubscriber = generateFullNameWithGender();
-           } catch (FileNotFoundException e) {
-               e.printStackTrace();
-           }
-           id = 2L;
-           long nextId = id;
-           id = id + rand.nextInt(100);
+        SubscriberFile newSubscriber = null;
+        try {
+            newSubscriber = generateFullNameWithGender();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        long nextId;
+        nextId = ++currentid;
 //           id++;
-           newSubscriber.setId(nextId);
-           newSubscriber.setAge(generateAge());
-           newSubscriber.setPhoneNumber(generatePhoneNumber());
+        newSubscriber.setId(nextId);
+        //currentid = nextId;
+        newSubscriber.setAge(generateAge());
+        String [] res = generatePhoneNumberWithOperator();
+        newSubscriber.setPhoneNumber(res[0]);
+        newSubscriber.setOperator(res[1]);
 
-           return newSubscriber;
-       }
+        return newSubscriber;
+    }
 
 
-    private static SubscriberFile generateFullNameWithGender() throws FileNotFoundException {
+    private SubscriberFile generateFullNameWithGender() throws FileNotFoundException {
 
+        ReadProperty prop = new ReadProperty();
         String propFile = "hw.properties";
-//        String pathData = prop.readProperty(propFile,"pathData");
-        String maleFirstName = ReadProperty.readProperty(propFile,"male.firstnames");
-        String maleLastName = ReadProperty.readProperty(propFile,"male.lastnames");
-        String femaleFirstName = ReadProperty.readProperty(propFile,"female.firstnames");
-        String femaleLastName = ReadProperty.readProperty(propFile,"female.lastnames");
+        String maleFirstName = prop.readProperty(propFile, "male.firstnames");
+        String maleLastName = prop.readProperty(propFile, "male.lastnames");
+        String femaleFirstName = prop.readProperty(propFile, "female.firstnames");
+        String femaleLastName = prop.readProperty(propFile, "female.lastnames");
 
 
         SubscriberFile newSubscriber = new SubscriberFile();
+        ReaderFile readerFile = new ReaderFile();
 
         if (rand.nextBoolean() == true) {
 
-            newSubscriber.setFirstName(ReaderFile.randomStringFromFile(new File(maleFirstName)));
-            newSubscriber.setLastName(ReaderFile.randomStringFromFile(new File(maleLastName)));
+            newSubscriber.setFirstName(readerFile.randomStringFromFile(new File(maleFirstName)));
+            newSubscriber.setLastName(readerFile.randomStringFromFile(new File(maleLastName)));
             newSubscriber.setGender(Gender.MAN.getGender());
         } else {
-            newSubscriber.setFirstName(ReaderFile.randomStringFromFile(new File(femaleFirstName)));
-            newSubscriber.setLastName(ReaderFile.randomStringFromFile(new File(femaleLastName)));
+            newSubscriber.setFirstName(readerFile.randomStringFromFile(new File(femaleFirstName)));
+            newSubscriber.setLastName(readerFile.randomStringFromFile(new File(femaleLastName)));
             newSubscriber.setGender(Gender.WOMAN.getGender());
         }
         return newSubscriber;
@@ -195,34 +202,62 @@ public class SubscriberFile implements Comparable<SubscriberFile> {
 }*/
 
 
-// TODO Гаус ????
-    public static int generateAge(){
+    // TODO Гаус ????
+    public int generateAge() {
         int lowerLimit = 18;
         int upperLimit = 60;
-        return rand.nextInt(upperLimit-lowerLimit)+lowerLimit;
+        return rand.nextInt(upperLimit - lowerLimit) + lowerLimit;
     }
 
-    // TODO переделать
-    public static String generatePhoneNumber() {
-        int firstThreeNumbers = 999;
-        int middleDigits = rand.nextInt(1_000_000);
+    // TODO есть вероятность одинакового номера у разных абонентов. Как быть ? Надо решать ?
 
-        // 1 способ
-        int lastDigit = rand.nextBoolean() ? 0 : 5;
+    /* Телефонные номера для каждого оператора со следующими префиксами:
+             - Life номера с префиксами: 38063*******, 38093*******, 38073*******
+             - Kievstar номера с префиксами: 38097*******, 38067*******, 38098*******
+             - Vodafone номера с префиксами: 38050*******, 38066*******, 38095********/
 
-        // 2 способ
-//        if (rand.nextBoolean())
-//            last = 0;
-//        else
-//            last = 5;
+    private String[] generatePhoneNumberWithOperator() {
 
-        long phoneNumber =
-                firstThreeNumbers*1_000_0000L + // двигаем влево на 7 разрядов
-                        middleDigits*10 + // умножаем на 10, чтобы сдвинуть влево на один разряд
-                        lastDigit; // 0 или 5
+        String[] arrayPrefixLife = {"38063", "38093", "38073"};
+        String[] arrayPrefixKievstar = {"38097", "38067", "38098"};
+        String[] arrayPrefixVodafone = {"38050", "38066", "38095"};
+        String prefixLife;
+        String prefixKievstar;
+        String prefixVodafone;
+        String operator [] = {"Life","Kievstar","Vodafone"};
+        String [] res = new String [2];
 
-        return Long.toString(phoneNumber);
+        int a = (int) (Math.random() * 3);
+        Random ran = new Random();
+//        System.out.println(a);
+
+        switch (a) {
+            case 0: {
+                prefixLife = arrayPrefixLife[(int) (Math.random() * 3)];
+                Integer middleDigits = ran.nextInt(10_000_000);
+                res[0] = prefixLife + middleDigits.toString();
+                res[1] = operator[a];
+            }
+            break;
+
+            case 1: {
+                prefixKievstar = arrayPrefixKievstar[(int) (Math.random() * 3)];
+                Integer middleDigits = ran.nextInt(10_000_000);
+                res[0] = prefixKievstar + middleDigits.toString();
+                res[1] = operator[a];
+            }
+            break;
+
+            case 2: {
+                prefixVodafone = arrayPrefixVodafone[(int) (Math.random() * 3)];
+                Integer middleDigits = ran.nextInt(10_000_000);
+                res[0] = prefixVodafone + middleDigits.toString();
+                res[1] = operator[a];
+            }
+        }
+        return res;
+
     }
 
+    }
 
-}

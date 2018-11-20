@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ReaderFile {
 
-        public static String randomStringFromFile(File fileName) throws FileNotFoundException {
+        public String randomStringFromFile(File fileName) throws FileNotFoundException {
             {
                 String result = null;
                 Random rand = new Random();

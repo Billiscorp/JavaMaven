@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class ReadProperty {
 
-    public static String readProperty(String fileProp, String key) {
+    public String readProperty(String fileProp, String key) {
         Properties prop = new Properties();
         InputStream is = ReadProperty.class.getClassLoader().getResourceAsStream(fileProp);
         try(InputStreamReader isr = new InputStreamReader(is, "UTF-8")) {
