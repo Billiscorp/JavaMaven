@@ -68,7 +68,7 @@ public class SubscribersToXlsx {
                         .limit(limit)
                         .peek(System.out::println)
                         .peek(s -> {
-         bgcngncgncncgn                   prepareSubscriber(s);
+                  prepareSubscriber(s);
                         })
                         .peek(System.out::println)
                        /* .peek(s -> {
