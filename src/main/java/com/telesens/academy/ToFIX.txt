@@ -1,0 +1,5 @@
+/home/billiscorp/Work/Telesens/QA-JA/JavaMaven/src/main/java/com/telesens/academy/automationpracticeOld/addres/ParseAddresDemo.java
+
+/home/billiscorp/Work/Telesens/QA-JA/JavaMaven/src/main/java/com/telesens/academy/automationpractice/TestRunner.java
+
+/home/billiscorp/Work/Telesens/QA-JA/JavaMaven/src/main/java/com/telesens/academy/automationpractice/addres/ParseAddressDemo.java

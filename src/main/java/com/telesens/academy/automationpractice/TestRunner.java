@@ -1,7 +1,7 @@
 package com.telesens.academy.automationpractice;
 
-
-import com.academy.automationpractice.ddt.framework.model.AddressData;
+// TODO ИСПРАВИТь !!!!!!!
+//import com.academy.automationpractice.ddt.framework.model.AddressData;
 import com.telesens.academy.automationpractice.addres.ParseAddressDemo;
 import com.telesens.academy.automationpractice.model.EntityDress;
 import com.telesens.academy.automationpractice.tests.CartTests;
@@ -49,11 +49,14 @@ public class TestRunner {
             cartTests.testAddDressToCart((EntityDress) testData[i][0], (int)testData[i][1]);
         }
 
-        String rawData = "";
+
+
+        // TODO ИСПРАВИТь !!!!!!!
+      /*  String rawData = "";
         AddressData address = ParseAddressDemo.parseAddress(rawData);
         Object[][] addressData = {
                 {address},
-        };
+        };*/
 
         // TODO
         cartTests.testAddDressToCart(entityDress1, 2);

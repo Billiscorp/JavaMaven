@@ -1,12 +1,13 @@
 package com.telesens.academy.automationpracticeOld.addres;
 
-import com.academy.automationpractice.ddt.framework.model.AddressData;
+// TODO ИСПРАВИТь !!!!!!!
+//import com.academy.automationpractice.ddt.framework.model.AddressData;
 
 public class ParseAddresDemo {
 
     public static void main(String[] args) {
 
-      // 1
+        // 1
 
 /*
 //        FirstName,LastName,Address,City,State,ZipCode,Country,HomePhone,MobilePhone,addressAlias
@@ -34,18 +35,20 @@ public class ParseAddresDemo {
 */
 
 
-
-
-
-
-
 // 2
 
 
 //        FirstName,LastName,Address,City,State,ZipCode,Country,HomePhone,MobilePhone,addressAlias
 //        Kolya,Ivanov,Petrovskogo st. 35,Kharkov,Alaska,61033,United States,+3809353613437,093234567,addressAddedRef
 
-        String addressString = "Kolya,Ivanov,Petrovskogo st. 35,Kharkov,Alaska,61033,United States,+3809353613437,093234567,addressAddedRef";
+
+
+
+        // TODO ИСПРАВИТь !!!!!!!
+
+
+
+      /*  String addressString = "Kolya,Ivanov,Petrovskogo st. 35,Kharkov,Alaska,61033,United States,+3809353613437,093234567,addressAddedRef";
 
         AddressData addres = parseAddress (addressString);
 
@@ -83,7 +86,8 @@ public class ParseAddresDemo {
                 .withMobilePhone(addressArray[MOBILE_PHONE_INDEX])
                 .withAddressAlias(addressArray[ADDRESS_ALIAS_INDEX]);
         return addres;
+    }*/
+
+
     }
-
-
 }
