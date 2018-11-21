@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Random;
+import java.util.function.Consumer;
 
 public class SubscriberFile implements Comparable<SubscriberFile> {
 

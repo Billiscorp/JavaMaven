@@ -26,64 +26,82 @@ package com.telesens.academy.lesson16_File.homework16;
 */
 
 
-import com.telesens.academy.lesson16_File.file.Subscriber;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.Random;
 import java.util.stream.Stream;
 
 public class SubscribersToXlsx {
 
-    ReadProperty prop = new ReadProperty();
-    private String propFile = "hw.properties";
-//    private String pathOut =  prop.readProperty(propFile,"pathOut");
-    private String fileXLS = prop.readProperty(propFile, "subscriber.xlsx");
-
-
     public static void main(String[] args) {
 
         Random ran = new Random();
-        Long initId = 0L + ran.nextInt(100);
+        Long initId = (long) ran.nextInt(100);
         SubscriberFile.setCurrentId(initId); // при вычитки из базы макисмального ID вставить сюда !!!!
 
         ReadProperty prop = new ReadProperty();
         String propFile = "hw.properties";
         String fileXLS = prop.readProperty(propFile, "subscriber.exc");
-        File file = new File("fileXLS");
+//        String fileTXT = prop.readProperty(propFile,"subscriber.txt");
         SubscriberFile subscriberFile = new SubscriberFile();
 
 
         System.out.println("***Generate***");
-        int limit = 10;
-        SubscriberFile [] array =
+        int limit = 5;
+//        int r = 0;
+
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Subscribers");
+
+        SubscriberFile[] array =
                 Stream
                         .generate(subscriberFile::nextSubscriber)
                         .limit(limit)
                         .peek(System.out::println)
                         .peek(s -> {
-                  prepareSubscriber(s);
-                        })
-                        .peek(System.out::println)
-                       /* .peek(s -> {
-                            try {
-                                fw.write(s.toString() + "\n");
-//                                        fw.write(prepareSubscriber(s)+"\n");    // меняем вывод  информации без "ключей"
-                            } catch (IOException e) {
+
+//                            for (int i = 0; i < limit; i++) {
+                            int i = 0;
+                                Row row = sheet.createRow(i);
+                            i++;
+                                Cell cellID = row.createCell(0);
+                                Cell cellLastName = row.createCell(1);
+                                Cell cellFirstName = row.createCell(2);
+                                Cell cellGender = row.createCell(3);
+                                Cell cellAge = row.createCell(4);
+                                Cell cellPhone = row.createCell(5);
+                                Cell cellOperator = row.createCell(6);
+
+                                cellID.setCellValue(s.getId());
+                                cellLastName.setCellValue(s.getLastName());
+                                cellFirstName.setCellValue(s.getFirstName());
+                                cellGender.setCellValue(s.getGender());
+                                cellAge.setCellValue(s.getAge());
+                                cellPhone.setCellValue(s.getPhoneNumber());
+                                cellOperator.setCellValue(s.getOperator());
+
+//                            }
+
+                            try(FileOutputStream out = new FileOutputStream(new File(fileXLS))) {
+                                workbook.write(out);
+                            }
+                            catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        })*/
+                                })
                         .toArray(SubscriberFile[]::new);
         System.out.println("***Finish***");
 
 
-     /*    *//*Результат subscribers.xlsx должен выглядеть так:
+
+
+
+        /*    *//*Результат subscribers.xlsx должен выглядеть так:
                             1 | Васильев  | Иван | м | 23 | 380630025465 | Life
                             2 | Петрова   | Катя | ж | 34 | 380670058694 | Kievstar
                             *//*
@@ -117,19 +135,30 @@ public class SubscribersToXlsx {
         catch (Exception e) {
             e.printStackTrace();
         }*/
+
+    /*} catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
+
+
+
+    /*private static String [] prepareSubscriber (SubscriberFile subscriberFile) {
+
+        String [] res = new String [7];
+        res[0] = subscriberFile.getId().toString();
+        res[1] = subscriberFile.getLastName();
+        res[2] = subscriberFile.getFirstName();
+        res[3] = subscriberFile.getGender();
+        res[4] = Integer.toString(subscriberFile.getAge());
+        res[5] = subscriberFile.getPhoneNumber();
+        res[6] = subscriberFile.getOperator();
+
+        return res;
+    }*/
+
+
     }
-
-
-
-
-    private static String prepareSubscriber (SubscriberFile subscriberFile) {
-        return subscriberFile.getId() + "," + subscriberFile.getLastName() + "," + subscriberFile.getFirstName() + "," + subscriberFile.getGender() + "," + subscriberFile.getAge() + "," + subscriberFile.getPhoneNumber()+ "," +subscriberFile.getOperator();
-    }
-
-
-
-
-
 
 
 
