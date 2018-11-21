@@ -54,6 +54,7 @@ public class SubscribersToXlsx {
         System.out.println("***Generate***");
         int limit = 5;
 //        int r = 0;
+        final int[] count = {0};
 
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Subscribers");
@@ -65,10 +66,8 @@ public class SubscribersToXlsx {
                         .peek(System.out::println)
                         .peek(s -> {
 
-//                            for (int i = 0; i < limit; i++) {
-                            int i = 0;
-                                Row row = sheet.createRow(i);
-                            i++;
+                            count[0]++;
+                            Row row = sheet.createRow(count[0]);
                                 Cell cellID = row.createCell(0);
                                 Cell cellLastName = row.createCell(1);
                                 Cell cellFirstName = row.createCell(2);
@@ -96,66 +95,6 @@ public class SubscribersToXlsx {
                                 })
                         .toArray(SubscriberFile[]::new);
         System.out.println("***Finish***");
-
-
-
-
-
-        /*    *//*Результат subscribers.xlsx должен выглядеть так:
-                            1 | Васильев  | Иван | м | 23 | 380630025465 | Life
-                            2 | Петрова   | Катя | ж | 34 | 380670058694 | Kievstar
-                            *//*
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("Subscribers");
-                            *//*Object[][] data = {
-                                    {1, "text_1", 1.1},
-                                    {3, "text_3", 1.3},
-                                    {5, "text_5", 1.5},
-                                    {7, "text_7", 1.7},
-                                    {9, "text_9", 1.9}
-                            };*//*
-        for (int r = 0; r < limit; r++) {
-            Row row = sheet.createRow(r);
-            Cell cellID = row.createCell(0);
-            Cell cellLastName = row.createCell(1);
-            Cell cellFirstName = row.createCell(2);
-            Cell cellGender = row.createCell(3);
-            Cell cellAge = row.createCell(4);
-            Cell cellPhone = row.createCell(5);
-            Cell cellOperator = row.createCell(6);
-
-            cellID.setCellValue(SubscriberFile.);
-
-            cellText.setCellValue((String)data[r][1]);
-            cellDouble.setCellValue((Double) data[r][2]);
-        }
-        try(FileOutputStream out = new FileOutputStream(new File("d:/temp/saved.xlsx"))) {
-            workbook.write(out);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
-    /*} catch (IOException e) {
-            e.printStackTrace();
-        }
-*/
-
-
-
-    /*private static String [] prepareSubscriber (SubscriberFile subscriberFile) {
-
-        String [] res = new String [7];
-        res[0] = subscriberFile.getId().toString();
-        res[1] = subscriberFile.getLastName();
-        res[2] = subscriberFile.getFirstName();
-        res[3] = subscriberFile.getGender();
-        res[4] = Integer.toString(subscriberFile.getAge());
-        res[5] = subscriberFile.getPhoneNumber();
-        res[6] = subscriberFile.getOperator();
-
-        return res;
-    }*/
 
 
     }
